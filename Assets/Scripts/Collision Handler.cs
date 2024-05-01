@@ -1,16 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
-    void OnCollisionEnter(Collision other)
-    {
-        Debug.Log(this.name + "** collided with **" + other.gameObject.name);
-    }
 
+    [SerializeField] ParticleSystem crash;
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"{this.name} --- triggered by --- {other.gameObject.name}");
+        startCrashSequence();
+    }
+
+    void startCrashSequence()
+    {
+        crash.Play();
+        GetComponent<BoxCollider>().enabled = false;
+        Invoke("ReloadLevel", 0.7f);
+    }
+
+    void ReloadLevel()
+    {
+        // Destroy(gameObject);
+        int currSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currSceneIndex); // this is where you would change the scene level for menus
     }
 }
+
+
+
+
