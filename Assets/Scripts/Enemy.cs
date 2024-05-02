@@ -5,8 +5,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] GameObject deathFX;
+    [SerializeField] GameObject hitFX;
     [SerializeField] Transform parent;
     [SerializeField] int scorePerHit = 15;
+    [SerializeField] int hitPoints = 2;
 
     ScoreBoard scoreBoard;
 
@@ -17,8 +19,12 @@ public class Enemy : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
+
         prcoessHit();
-        killEnemy();
+        if (hitPoints < 1)
+        {
+            killEnemy();
+        }
     }
 
     void killEnemy()
@@ -30,6 +36,9 @@ public class Enemy : MonoBehaviour
 
     void prcoessHit()
     {
+        GameObject vfx = Instantiate(hitFX, transform.position, Quaternion.identity);
+        vfx.transform.parent = parent;
+        hitPoints--;
         scoreBoard.increaseScore(scorePerHit);
     }
 }

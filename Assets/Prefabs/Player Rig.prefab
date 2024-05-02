@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b27a3ea918d4cd4a9e5d81e42392f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlSpeed: 10
+  controlSpeed: 20
   xRange: 10
   yRange: 7
   lasers:
@@ -432,7 +432,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b62f05466e524d5389bca7df5a654eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadDelay: 100000
   crash: {fileID: 2002964082932722418}
 --- !u!65 &3945146797815351115
 BoxCollider:
