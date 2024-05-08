@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class Enemy : MonoBehaviour
         GameObject vfx = Instantiate(deathFX, transform.position, Quaternion.identity);
         vfx.transform.parent = parent;
         Destroy(gameObject);
+        PlayerPrefs.SetInt("Score", scoreBoard.getScore());
+        Debug.Log(PlayerPrefs.GetInt("Score"));
+        SceneManager.LoadScene(2);
     }
 
     void prcoessHit()

@@ -6,8 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    private ScoreBoard scoreBoard;
 
     [SerializeField] ParticleSystem crash;
+    void Start()
+    {
+        scoreBoard = FindObjectOfType<ScoreBoard>();
+    }
     void OnTriggerEnter(Collider other)
     {
         startCrashSequence();
@@ -23,8 +28,10 @@ public class CollisionHandler : MonoBehaviour
     void ReloadLevel()
     {
         // Destroy(gameObject);
-        int currSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currSceneIndex); // this is where you would change the scene level for menus
+        //int currSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        //SceneManager.LoadScene(currSceneIndex); // this is where you would change the scene level for menus
+        PlayerPrefs.SetInt("Score", scoreBoard.getScore());
+        SceneManager.LoadScene(2);
     }
 }
 
