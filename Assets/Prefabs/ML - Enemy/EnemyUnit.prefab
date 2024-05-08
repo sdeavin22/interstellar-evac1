@@ -85,10 +85,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0096154e0883442aa96458a41d58fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5052765187574500020, guid: 3514792ff5f35c44f83501e145069192, type: 3}
   missilePrefab: {fileID: 7332180683224099598, guid: f36d0281dbb4dfc468c67cfe915f80ec, type: 3}
   firingInterval: 2
-  mainCamera: {fileID: 0}
+  detectionRange: 85
+  distanceFromCamera: 100
 --- !u!1 &6271303463924051475
 GameObject:
   m_ObjectHideFlags: 0

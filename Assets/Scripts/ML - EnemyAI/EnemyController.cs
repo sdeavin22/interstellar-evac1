@@ -8,8 +8,8 @@ public class EnemyController : MonoBehaviour
     // Starting variables for basic ai aim and fire
     private Transform player;
     public GameObject missilePrefab;
-    public float firingInterval = 2.0f;
-    public float nextFireTime = 0f;
+    public float firingInterval;
+    public float detectionRange;
 
     // Added variables for realistic aim
     private Vector3 lastPlayerPosition;
@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
     private Camera mainCamera;
     private Vector3 viewportPosition;
     private bool positionSet = false;
+    private float nextFireTime = 0f;
 
     // State machine
     enum State { Idle, Attack }
@@ -57,7 +58,7 @@ public class EnemyController : MonoBehaviour
         {
             case State.Idle:
                 // Checks if player is near to swap to attack state
-                if (Vector3.Distance(transform.position, player.position) < 50f)
+                if (Vector3.Distance(transform.position, player.position) < detectionRange)
                 {
                     currentState = State.Attack;
                 }
@@ -121,7 +122,7 @@ public class EnemyController : MonoBehaviour
     */
     void FireMissile()
     {
-        GameObject missile = Instantiate(missilePrefab, transform.position, transform.rotation);
+        Instantiate(missilePrefab, transform.position, transform.rotation);
     }
 
     float RandomExcludingMiddle(float min1, float max1, float min2, float max2)

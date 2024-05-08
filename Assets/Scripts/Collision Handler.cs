@@ -10,7 +10,10 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] ParticleSystem crash;
     void OnTriggerEnter(Collider other)
     {
-        startCrashSequence();
+        if (!(other.gameObject.tag == "SpawnArea"))
+        {
+            startCrashSequence();
+        }
     }
 
     void startCrashSequence()

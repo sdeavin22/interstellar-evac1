@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
 public class EnemyMissile : MonoBehaviour
 {
-    private Transform player;
-    public float speed = 10f;
 
+    public float speed = 10f;
     public float rotationSpeed = 3f;
+
     private bool shouldRotate = true;
+    private Transform player;
+    private float timeCreated, maxTimeAlive = 5f;
 
     void Start()
     {
@@ -20,10 +19,10 @@ public class EnemyMissile : MonoBehaviour
         }
         else
         {
-            UnityEngine.Debug.LogError("Missile script could not find an object with tag 'Player'.");
+            Debug.LogError("Missile script could not find an object with tag 'Player'.");
         }
 
-        // Destroy(gameObject, 5f);
+        timeCreated = Time.time;
     }
 
     void Update()
@@ -54,6 +53,12 @@ public class EnemyMissile : MonoBehaviour
 
         // Move the missile forward in its current facing direction
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+        //Check if the missile has existed for too long and destroy it if so
+        if (Time.time - timeCreated > maxTimeAlive)
+        {
+            Destroy(gameObject);
+        }
     }
 
     
@@ -64,6 +69,7 @@ public class EnemyMissile : MonoBehaviour
             // Implement damage logic here
             // Example: other.GetComponent<PlayerHealth>().TakeDamage(damageAmount);
 
+            /*
             ParentEnemyMissile parentController = GetComponentInParent<ParentEnemyMissile>();
             if (parentController != null)
             {
@@ -71,8 +77,9 @@ public class EnemyMissile : MonoBehaviour
             }
             else
             {
-                UnityEngine.Debug.LogError("Missile has no ParentEnemyMissile attached to its parent.");
+                Debug.LogError("Missile has no ParentEnemyMissile attached to its parent.");
             }
+            */
         }
     }
 }
