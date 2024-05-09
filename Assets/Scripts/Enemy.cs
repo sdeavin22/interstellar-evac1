@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] GameObject deathFX;
     [SerializeField] GameObject hitFX;
-    [SerializeField] Transform parent;
     [SerializeField] int scorePerHit = 15;
     [SerializeField] int hitPoints = 2;
 
@@ -20,28 +16,24 @@ public class Enemy : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
+        processHit();
 
-        prcoessHit();
         if (hitPoints < 1)
         {
             killEnemy();
         }
     }
-
     void killEnemy()
     {
-        GameObject vfx = Instantiate(deathFX, transform.position, Quaternion.identity);
-        vfx.transform.parent = parent;
+        Instantiate(deathFX, transform.position, Quaternion.identity);
         Destroy(gameObject);
         PlayerPrefs.SetInt("Score", scoreBoard.getScore());
         Debug.Log(PlayerPrefs.GetInt("Score"));
-        SceneManager.LoadScene(2);
     }
 
-    void prcoessHit()
+    void processHit()
     {
-        GameObject vfx = Instantiate(hitFX, transform.position, Quaternion.identity);
-        vfx.transform.parent = parent;
+        Instantiate(hitFX, transform.position, Quaternion.identity);
         hitPoints--;
         scoreBoard.increaseScore(scorePerHit);
     }

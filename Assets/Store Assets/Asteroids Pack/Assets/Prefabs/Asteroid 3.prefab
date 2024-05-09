@@ -73,6 +73,8 @@ GameObject:
   - component: {fileID: 469044}
   - component: {fileID: 5428902}
   - component: {fileID: 11467940}
+  - component: {fileID: 3349843130820822698}
+  - component: {fileID: 3695578570543125728}
   m_Layer: 0
   m_Name: Asteroid 3
   m_TagString: Enemy
@@ -136,6 +138,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tumble: 0.25
+--- !u!114 &3349843130820822698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 490faa3afceee4987acdc35d0be0a518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathFX: {fileID: 5421678880669036420, guid: 39cd658a2d6174bfe96f928c756589fc, type: 3}
+  hitFX: {fileID: 5421678880669036420, guid: 98fbb282fc8f24a6580231e557b2bf27, type: 3}
+  scorePerHit: 5
+  hitPoints: 2
+--- !u!65 &3695578570543125728
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130102}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.4068794, y: 2.4383087, z: 2.4874878}
+  m_Center: {x: -0.07823372, y: 0.015716553, z: 0.06518173}
 --- !u!1 &153142
 GameObject:
   m_ObjectHideFlags: 0

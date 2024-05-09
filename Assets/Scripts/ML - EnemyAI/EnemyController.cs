@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -20,7 +17,7 @@ public class EnemyController : MonoBehaviour
     private Camera mainCamera;
     private Vector3 viewportPosition;
     private bool positionSet = false;
-    private float nextFireTime = 0f;
+    private float nextFireTime = 1f;
 
     // State machine
     enum State { Idle, Attack }
@@ -28,16 +25,17 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        mainCamera = Camera.main; // Sets camera variable as camera tagged MainCamera
+        mainCamera = Camera.main;
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
             player = playerObject.transform;
+            SetInitialViewportPosition();
         }
         else
         {
-            UnityEngine.Debug.LogError("Enemy AI script could not find an object with tag 'Player'.");
+            Debug.LogError("Enemy AI script could not find an object with tag 'Player'.");
         }
 
         lastPosition = transform.position; // Sets lastPosition to the starting position
@@ -62,11 +60,12 @@ public class EnemyController : MonoBehaviour
                 {
                     currentState = State.Attack;
                 }
+                UpdatePositionRelativeToCamera();
+
                 break;
             case State.Attack:
                 if (!positionSet)
                 {
-                    SetInitialViewportPosition();
                     positionSet = true;
                 }
                 UpdatePositionRelativeToCamera();
@@ -127,13 +126,13 @@ public class EnemyController : MonoBehaviour
 
     float RandomExcludingMiddle(float min1, float max1, float min2, float max2)
     {
-        if (UnityEngine.Random.value < 0.5f) // 50% chance to pick either range
+        if (Random.value < 0.5f) // 50% chance to pick either range
         {
-            return UnityEngine.Random.Range(min1, max1);
+            return Random.Range(min1, max1);
         }
         else
         {
-            return UnityEngine.Random.Range(min2, max2);
+            return Random.Range(min2, max2);
         }
     }
 
@@ -144,7 +143,7 @@ public class EnemyController : MonoBehaviour
         float randomY = RandomExcludingMiddle(0.1f, 0.4f, 0.7f, 0.8f);
 
         // Set a depth range; how far the object should be from the camera
-        float depth = UnityEngine.Random.Range(70f, 100f);
+        float depth = Random.Range(70f, 100f);
 
         // Set a random position within the viewport
         viewportPosition = new Vector3(randomX, randomY, depth);

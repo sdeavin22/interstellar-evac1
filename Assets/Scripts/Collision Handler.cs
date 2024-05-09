@@ -1,40 +1,36 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
-    private ScoreBoard scoreBoard;
-
     [SerializeField] ParticleSystem crash;
-    void Start()
+    void OnCollisionEnter(Collision collision)
     {
-        scoreBoard = FindObjectOfType<ScoreBoard>();
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if (!(other.gameObject.tag == "SpawnArea"))
+        if (collision.gameObject.tag == "Enemy")
         {
             startCrashSequence();
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Untagged"))
+        {
+            startCrashSequence();
+        }
+        else if (other.CompareTag("Finish"))
+        {
+            SceneManager.LoadSceneAsync(3);
+        }
+
     }
 
     void startCrashSequence()
     {
         crash.Play();
         GetComponent<BoxCollider>().enabled = false;
-        Invoke("ReloadLevel", 0.7f);
-    }
-
-    void ReloadLevel()
-    {
-        // Destroy(gameObject);
-        //int currSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        //SceneManager.LoadScene(currSceneIndex); // this is where you would change the scene level for menus
-        PlayerPrefs.SetInt("Score", scoreBoard.getScore());
-        SceneManager.LoadScene(2);
+        SceneManager.LoadSceneAsync(2);
     }
 }
 

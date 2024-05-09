@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3617378405948161532}
   - component: {fileID: 576180112316323221}
   - component: {fileID: 5173521831371855145}
-  - component: {fileID: 838551817640358003}
+  - component: {fileID: -6808147186347207842}
   m_Layer: 0
   m_Name: EnemyUnit
   m_TagString: Untagged
@@ -49,9 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFX: {fileID: 5421678880669036420, guid: 39cd658a2d6174bfe96f928c756589fc, type: 3}
   hitFX: {fileID: 5421678880669036420, guid: 98fbb282fc8f24a6580231e557b2bf27, type: 3}
-  parent: {fileID: 0}
   scorePerHit: 15
-  hitPoints: 10
+  hitPoints: 8
 --- !u!65 &5173521831371855145
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71,9 +70,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8, y: 0.3, z: 2.3}
+  m_Size: {x: 2.05, y: 1.25, z: 2.8}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &838551817640358003
+--- !u!114 &-6808147186347207842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,9 +85,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missilePrefab: {fileID: 7332180683224099598, guid: f36d0281dbb4dfc468c67cfe915f80ec, type: 3}
-  firingInterval: 2
-  detectionRange: 85
-  distanceFromCamera: 100
+  firingInterval: 3
+  detectionRange: 100
 --- !u!1 &6271303463924051475
 GameObject:
   m_ObjectHideFlags: 0
