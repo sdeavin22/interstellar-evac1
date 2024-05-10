@@ -10,6 +10,12 @@ public class EnemySpawnAreaController : MonoBehaviour
     public GameObject enemyPrefab;
 
     private bool playerInside;
+    private AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -34,10 +40,11 @@ public class EnemySpawnAreaController : MonoBehaviour
 
         while (playerInside)
         {
+            audioManager.PlaySFXEnemy(audioManager.enemy_spawn);
             Instantiate(
                 enemyPrefab,
                 new Vector3(0,0,0),
-                Quaternion.identity
+                transform.rotation
             );
 
             //Wait a set time till next spawn

@@ -7,10 +7,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] int scorePerHit = 15;
     [SerializeField] int hitPoints = 2;
 
+    AudioManager audioManager;
+
     ScoreBoard scoreBoard;
 
-    void Start()
+    private void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         scoreBoard = FindObjectOfType<ScoreBoard>();
     }
 
@@ -25,6 +28,7 @@ public class Enemy : MonoBehaviour
     }
     void killEnemy()
     {
+        audioManager.PlaySFX(audioManager.asteroid_explosion_1);
         Instantiate(deathFX, transform.position, Quaternion.identity);
         Destroy(gameObject);
         PlayerPrefs.SetInt("Score", scoreBoard.getScore());

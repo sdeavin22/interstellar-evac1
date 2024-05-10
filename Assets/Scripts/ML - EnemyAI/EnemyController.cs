@@ -19,9 +19,17 @@ public class EnemyController : MonoBehaviour
     private bool positionSet = false;
     private float nextFireTime = 1f;
 
+    AudioManager audioManager;
+
+
     // State machine
     enum State { Idle, Attack }
     State currentState = State.Idle;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     void Start()
     {
@@ -61,6 +69,7 @@ public class EnemyController : MonoBehaviour
                     currentState = State.Attack;
                 }
                 UpdatePositionRelativeToCamera();
+                LookAtPlayer();
 
                 break;
             case State.Attack:
@@ -69,6 +78,7 @@ public class EnemyController : MonoBehaviour
                     positionSet = true;
                 }
                 UpdatePositionRelativeToCamera();
+                LookAtPlayer();
 
                 if (Time.time >= nextFireTime)
                 {
@@ -121,7 +131,10 @@ public class EnemyController : MonoBehaviour
     */
     void FireMissile()
     {
-        Instantiate(missilePrefab, transform.position, transform.rotation);
+        audioManager.PlaySFXEnemy(audioManager.enemy_shoot);
+        GameObject missile = Instantiate(missilePrefab, transform.position, transform.rotation);
+        EnemyMissile missileScript = missile.GetComponent<EnemyMissile>();
+        missileScript.player = player;
     }
 
     float RandomExcludingMiddle(float min1, float max1, float min2, float max2)
@@ -139,8 +152,8 @@ public class EnemyController : MonoBehaviour
     void SetInitialViewportPosition()
     {
         // Random x and y values within the viewport 0-1 range
-        float randomX = RandomExcludingMiddle(0.1f, 0.4f, 0.7f, 0.8f);
-        float randomY = RandomExcludingMiddle(0.1f, 0.4f, 0.7f, 0.8f);
+        float randomX = RandomExcludingMiddle(0.2f, 0.4f, 0.6f, 0.8f);
+        float randomY = RandomExcludingMiddle(0.2f, 0.4f, 0.6f, 0.8f);
 
         // Set a depth range; how far the object should be from the camera
         float depth = Random.Range(70f, 100f);

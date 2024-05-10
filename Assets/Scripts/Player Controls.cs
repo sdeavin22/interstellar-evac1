@@ -23,6 +23,12 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] float controlRoll = -20f;
 
     float xThrow, yThrow;
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     void Update()
     {
@@ -65,11 +71,13 @@ public class PlayerControls : MonoBehaviour
 
         if (Input.GetButton("Fire1"))
         {
+            audioManager.PlaySound();
             SetLasersActive(true);
         }
 
         else
         {
+            audioManager.StopSound();
             SetLasersActive(false);
         }
     }
